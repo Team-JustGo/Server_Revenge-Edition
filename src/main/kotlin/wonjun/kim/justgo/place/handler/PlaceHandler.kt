@@ -20,16 +20,16 @@ class PlaceHandler(val placeRepository: PlaceRepository) {
         SuggestionRequest.from(serverRequest.queryParams().toSingleValueMap()).toMono()
             .flatMap(::findLocation)
             .flatMap(ServerResponse.ok()::bodyValue)
-            .onErrorResume { ServerResponse.notFound().build() }
+            .onErrorResume { ServerResponse.status(500).build() }
 
     private fun findLocation(request: SuggestionRequest) =
         placeRepository.findByLocationNear(
-            Point(request.departLat, request.departLng),
-            Distance(request.maxDistance?.toDouble()?.div(1000) ?: 5.0, Metrics.KILOMETERS)
+            Point(request.departLng, request.departLat),
+            Distance(request.maxDistance.toDouble() / 1000, Metrics.KILOMETERS)
         ).map {
             PlaceResponse(
                 it.id, it.tags,
-                getDistanceByLatLon(it.location.x, it.location.y, request.departLat, request.departLng)
+                getDistanceByLatLon(it.location.y, it.location.x, request.departLat, request.departLng)
             )
         }.collectList()
 

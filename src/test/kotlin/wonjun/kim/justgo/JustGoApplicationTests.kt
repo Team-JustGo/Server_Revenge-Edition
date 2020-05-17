@@ -16,7 +16,6 @@ import org.springframework.test.web.reactive.server.WebTestClient
 @SpringBootTest
 @ExtendWith(RestDocumentationExtension::class)
 class JustGoApplicationTests {
-
     private lateinit var webTestClient: WebTestClient
 
     @BeforeEach

@@ -6,7 +6,7 @@ data class SuggestionRequest(
     val departLat: Double,
     val departLng: Double,
     val tags: List<String>?,
-    val maxDistance: Int?
+    val maxDistance: Int
 ) {
     companion object {
         fun from(map: Map<String, String>): SuggestionRequest  {
@@ -19,7 +19,7 @@ data class SuggestionRequest(
                 require(departLat in 0.0..180.0)
                 require(departLng in 0.0..180.0)
 
-                return SuggestionRequest(departLat, departLng, tags, maxDistance)
+                return SuggestionRequest(departLat, departLng, tags, maxDistance ?: 5000)
             } catch (e: Exception) {
                 throw BadRequestException()
             }

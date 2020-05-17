@@ -9,86 +9,52 @@
 [[overview]]
 = Overview
 
-[[overview-http-verbs]]
-== HTTP verbs
+저스트고 최고
 
-RESTful notes tries to adhere as closely as possible to standard HTTP and REST conventions in its
-use of HTTP verbs.
+== Commons
 
-|===
-| Verb | Usage
-
-| `GET`
-| Used to retrieve a resource
-
-| `POST`
-| Used to create a new resource
-
-| `PATCH`
-| Used to update an existing resource, including partial updates
-
-| `DELETE`
-| Used to delete an existing resource
-|===
-
-[[overview-http-status-codes]]
-== HTTP status codes
-
-RESTful notes tries to adhere as closely as possible to standard HTTP and REST conventions in its
-use of HTTP status codes.
-
-|===
-| Status code | Usage
-
-| `200 OK`
-| The request completed successfully
-
-| `201 Created`
-| A new resource has been created successfully. The resource's URI is available from the response's
-`Location` header
-
-| `204 No Content`
-| An update to an existing resource has been applied successfully
-
-| `400 Bad Request`
-| The request was malformed. The response body will include an error providing further information
-
-| `404 Not Found`
-| The requested resource did not exist
-|===
+- Content-Type: `application/json`
 
 
-== 몰라[get]
+= Basic Routers
+== GET /
 
-몰라
+health checker router
 
 
 include::{snippets}/index/curl-request.adoc[]
 
-=== 요청 구조
-
-==== 요청 파라미터들
+=== Request
 
 include::{snippets}/index/http-request.adoc[]
 
-=== 응답 구조
-
-==== 응답 파라미터들
+=== Response
 
 include::{snippets}/index/http-response.adoc[]
 
-== 이렇게돼[get]
+=== Example Response
 
-include::{snippets}/index/curl-request.adoc[]
+include::{snippets}/index/response-body.adoc[]
 
-=== 요청 구조
+= Place
+== GET /place/suggestion
 
-==== 요청 파라미터들
+장소제안 api
 
-include::{snippets}/index/http-request.adoc[]
+=== Request
 
-=== 응답 구조
+include::{snippets}/placeRouter/http-request.adoc[]
 
-==== 응답 파라미터들
+=== Response
 
-include::{snippets}/index/http-response.adoc[]
+==== 200
+
+include::{snippets}/placeRouter/200/http-response.adoc[]
+
+==== 400
+
+include::{snippets}/placeRouter/400/http-response.adoc[]
+
+=== Example Response
+
+include::{snippets}/placeRouter/response-body.adoc[]
