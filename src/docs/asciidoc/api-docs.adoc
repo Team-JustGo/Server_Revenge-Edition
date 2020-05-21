@@ -43,7 +43,9 @@ include::{snippets}/index/response-body.adoc[]
 
 === Request
 
-include::{snippets}/placeRouter/http-request.adoc[]
+include::{snippets}/placeRouter/200/http-request.adoc[]
+
+include::{snippets}/placeRouter/200/request-parameters.adoc[]
 
 === Response
 
@@ -51,10 +53,12 @@ include::{snippets}/placeRouter/http-request.adoc[]
 
 include::{snippets}/placeRouter/200/http-response.adoc[]
 
-==== 400
+include::{snippets}/placeRouter/200/response-fields.adoc[]
 
+==== 400
+- 파라미터가 제대로 들어오지 않았을 때
 include::{snippets}/placeRouter/400/http-response.adoc[]
 
 === Example Response
 
-include::{snippets}/placeRouter/response-body.adoc[]
+include::{snippets}/placeRouter/200/response-body.adoc[]
