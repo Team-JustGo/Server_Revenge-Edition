@@ -6,7 +6,6 @@ import org.springframework.data.geo.Point
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
-import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 import wonjun.kim.justgo.getDistanceByLatLon
 import wonjun.kim.justgo.place.repository.PlaceRepository
