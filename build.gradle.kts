@@ -12,7 +12,7 @@ group = "wonjun.kim"
 version = "0.0.1"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
-val developmentOnly by configurations.creating
+val developmentOnly: Configuration by configurations.creating
 configurations {
     runtimeClasspath {
         extendsFrom(developmentOnly)
@@ -31,14 +31,17 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.4.RELEASE")
-    testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient:2.0.4.RELEASE")
+    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
 
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
     testImplementation("io.projectreactor:reactor-test")
+    testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
+
+    asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
 ext {
