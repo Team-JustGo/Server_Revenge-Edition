@@ -1,4 +1,4 @@
-package wonjun.kim.justgo.navigation.router.dto
+package wonjun.kim.justgo.navigation.dto
 
 data class DirectionDTO (
 

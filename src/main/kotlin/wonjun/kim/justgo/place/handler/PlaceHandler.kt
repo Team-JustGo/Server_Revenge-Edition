@@ -4,6 +4,7 @@ import org.springframework.data.geo.Distance
 import org.springframework.data.geo.Metrics
 import org.springframework.data.geo.Point
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import reactor.kotlin.core.publisher.toMono
@@ -13,7 +14,7 @@ import wonjun.kim.justgo.place.router.request.SuggestionRequest
 import wonjun.kim.justgo.place.router.response.PlaceResponse
 
 @Component
-class PlaceHandler(val placeRepository: PlaceRepository) {
+class PlaceHandler(private val placeRepository: PlaceRepository) {
 
     fun handleSuggestion(serverRequest: ServerRequest) =
         SuggestionRequest.from(serverRequest.queryParams().toSingleValueMap()).toMono()
@@ -31,5 +32,12 @@ class PlaceHandler(val placeRepository: PlaceRepository) {
                 getDistanceByLatLon(it.location.y, it.location.x, request.departLat, request.departLng)
             )
         }.collectList()
+
+    private fun findPlaceByPositionAndTag(departLat: Double, departLng: Double, maxDistance: Int, tags: List<String>) =
+        placeRepository
+            .findByLocationNear(Point(departLng, departLat), Distance(maxDistance.toDouble() / 1000, Metrics.KILOMETERS))
+            .filter { it.tags.any { tags.contains(it) } }
+            .map { PlaceResponse(it.id, it.tags, getDistanceByLatLon(it.location.y, it.location.x, departLat, departLng)) }
+            .collectList()
 
 }
