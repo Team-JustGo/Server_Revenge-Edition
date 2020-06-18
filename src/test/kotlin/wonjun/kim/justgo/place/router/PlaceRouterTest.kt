@@ -40,7 +40,23 @@ class PlaceRouterTest {
     }
 
     @Test
-    fun `should return places by lat,lng,distance`() {
+    fun `should return places by lat, lng, distance`() {
+        webTestClient.get()
+            .uri { builder ->
+                builder.path("/place/suggestion")
+                    .queryParam("departLat", 33.4)
+                    .queryParam("departLng", 126.8)
+                    .queryParam("maxDistance", 20000)
+                    .build()
+            }
+            .exchange()
+            .expectStatus().isOk
+            .expectBodyList(PlaceResponse::class.java)
+            .hasSize(2)
+    }
+
+    @Test
+    fun `should return places by lat, lng, distance, tags`() {
         webTestClient.get()
             .uri { builder ->
                 builder.path("/place/suggestion")
@@ -60,7 +76,7 @@ class PlaceRouterTest {
                     relaxedRequestParameters(
                         parameterWithName("departLat").description("출발지의 위도"),
                         parameterWithName("departLng").description("출발지의 경도"),
-                        parameterWithName("maxDistance").description("최대 거리 (미터)"),
+                        parameterWithName("maxDistance").description("최대 거리 (미터)").optional(),
                         parameterWithName("tags").description("태그 ( , 로 구분)").optional()
                     ),
                     responseFields(
