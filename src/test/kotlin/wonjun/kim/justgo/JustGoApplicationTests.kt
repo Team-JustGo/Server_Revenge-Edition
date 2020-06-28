@@ -12,7 +12,6 @@ import org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation
 import org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation.documentationConfiguration
 import org.springframework.test.web.reactive.server.WebTestClient
 
-
 @SpringBootTest
 @ExtendWith(RestDocumentationExtension::class)
 class JustGoApplicationTests {
@@ -21,20 +20,20 @@ class JustGoApplicationTests {
     @BeforeEach
     fun setUp(applicationContext: ApplicationContext, restDocumentation: RestDocumentationContextProvider) {
         this.webTestClient = WebTestClient.bindToApplicationContext(applicationContext)
-                .configureClient()
-                .filter(documentationConfiguration(restDocumentation))
-                .build()
+            .configureClient()
+            .filter(documentationConfiguration(restDocumentation))
+            .build()
     }
 
     @Test
     fun test() {
         webTestClient.get()
-                .uri("/")
-                .accept(MediaType.APPLICATION_JSON)
-                .exchange()
-                .expectStatus()
-                .isOk
-                .expectBody()
-                .consumeWith(document("index"))
+            .uri("/")
+            .accept(MediaType.APPLICATION_JSON)
+            .exchange()
+            .expectStatus()
+            .isOk
+            .expectBody()
+            .consumeWith(document("index"))
     }
 }

@@ -39,6 +39,7 @@ dependencies {
     }
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
+    testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
 
     asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
